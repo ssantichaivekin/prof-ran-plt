@@ -1,10 +1,7 @@
 import plot_tools
 
-fig, ax = plot_tools.setup()
-plot_tools.line(ax, (1, 1), (2, 2), col=plot_tools.RED)
-
-plot_tools.dot(ax, (2, 2), col=plot_tools.BLUE)
-
-plot_tools.text(ax, (3, 3), "my blue dot", col=plot_tools.BLUE)
-
-plot_tools.show()
+fig = plot_tools.FigureWrapper("Example Plot")
+fig.line((1, 1), (2, 2), col=plot_tools.RED)
+fig.dot((2, 2), col=plot_tools.BLUE)
+fig.text((3, 3), "my blue dot", col=plot_tools.BLUE)
+fig.show()

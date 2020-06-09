@@ -10,35 +10,34 @@ from matplotlib import pyplot as plt
 RED = (1, 0, 0, 1)
 GREEN = (0, 1, 0, 1)
 BLUE = (0, 0, 1, 1)
+LINEWIDTH = 2
+FONTSIZE = 12
 
-def line(ax, p1, p2, col=RED, linewidth=2):
-    x0, y0 = p1
-    x1, y1 = p2
-    ax.plot([x0, x1], [y0, y1], color=col, linewidth=2)
+class FigureWrapper:
+    def __init__(self, title):
+        self.fig = plt.figure()
+        self.ax = self.fig.subplots(1, 1) # creates a figure with one Axes (plot)
+        self.ax.autoscale()
+        self.ax.margins(0.1)
+        self.ax.axis("off")
+        self.ax.title = title
+    
+    def line(self, p1, p2, col=RED):
+        x0, y0 = p1
+        x1, y1 = p2
+        self.ax.plot([x0, x1], [y0, y1], color=col, linewidth=LINEWIDTH)
+    
+    def dot(self, p, col=RED):
+        x, y = p
+        self.ax.plot(x, y, 'o', color=col)
+    
+    def text(self, p, s, col=RED):
+        x, y = p
+        self.ax.text(x, y, s, color=col, fontsize=FONTSIZE)
+    
+    def show(self):
+        # plt.figure(self.fig.number)
+        plt.show()
 
-def dot(ax, p, shape = 'o', col=RED):
-    # For more dot shapes, see https://matplotlib.org/3.1.1/api/markers_api.html
-    x, y = p
-    ax.plot(x, y, 'o', color=col)
-
-def text(ax, p, text, col=RED):
-    # For more controls on text size, font, etc. see
-    # https://matplotlib.org/3.1.0/api/text_api.html#matplotlib.text.Text
-    x, y = p
-    ax.text(x, y, text, color=col, fontsize=12)
-
-def show():
-    """ Display in matplotlib window. """
-    plt.show()
-
-def save(fig, file_name):
-    """ Takes a string of the form filename.png as input and saves image to that file. """
-    fig.savefig(file_name)
-
-def setup():
-    fig = plt.figure()
-    ax = fig.subplots(1, 1) # creates a figure with one Axes (plot)
-    ax.autoscale()
-    ax.margins(0.1)
-    ax.axis("off")
-    return fig, ax
+    def save(self, filename):
+        fig.savefig(filename)
