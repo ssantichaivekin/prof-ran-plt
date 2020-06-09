@@ -27,8 +27,9 @@ def text(ax, p, text, col=RED):
     x, y = p
     ax.text(x, y, text, color=col, fontsize=12)
 
-def show():
+def show(fig):
     """ Display in matplotlib window. """
+    plt.figure(fig.number)
     plt.show()
 
 def save(fig, file_name):

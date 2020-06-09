@@ -7,4 +7,4 @@ plot_tools.dot(ax, (2, 2), col=plot_tools.BLUE)
 
 plot_tools.text(ax, (3, 3), "my blue dot", col=plot_tools.BLUE)
 
-plot_tools.show()
+plot_tools.show(fig)
