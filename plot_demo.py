@@ -1,11 +1,10 @@
-import plot_tools as plot
+import plot_tools
 
-plot.line((0, 0), (0, 1), plot.RED, 1)
-plot.line((1, 1), (2, 2), plot.BLUE, 2)
+fig, ax = plot_tools.setup()
+plot_tools.line(ax, (1, 1), (2, 2), col=plot_tools.RED)
 
-plot.dot((2, 2))
-plot.dot((3, 3), col=plot.BLUE)
+plot_tools.dot(ax, (2, 2), col=plot_tools.BLUE)
 
-plot.text((3, 3), "my blue dot", plot.BLUE)
+plot_tools.text(ax, (3, 3), "my blue dot", col=plot_tools.BLUE)
 
-plot.show()
+plot_tools.show()

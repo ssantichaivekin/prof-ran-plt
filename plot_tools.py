@@ -1,9 +1,7 @@
-import numpy as np
+import matplotlib
+# if your matplotlib doesn't pop up a window, force it to use tkinter backend
+# matplotlib.use("tkagg")
 
-import matplotlib as mpl
-# mpl.use('Agg')
-
-from matplotlib import collections as mc
 from matplotlib import pyplot as plt
 
 # Colors
@@ -13,38 +11,34 @@ RED = (1, 0, 0, 1)
 GREEN = (0, 1, 0, 1)
 BLUE = (0, 0, 1, 1)
 
-# Initialize figure for drawing
-fig = plt.figure()
-
-def line(p1, p2, col=RED, linewidth=2):
+def line(ax, p1, p2, col=RED, linewidth=2):
     x0, y0 = p1
     x1, y1 = p2
-    plt.plot([x0, x1], [y0, y1], color=col, linewidth=2)
+    ax.plot([x0, x1], [y0, y1], color=col, linewidth=2)
 
-def dot(p, shape = 'o', col=RED):
+def dot(ax, p, shape = 'o', col=RED):
     # For more dot shapes, see https://matplotlib.org/3.1.1/api/markers_api.html
     x, y = p
-    plt.plot(x, y, 'o', color=col)
+    ax.plot(x, y, 'o', color=col)
 
-def text(p, text, col=RED):
+def text(ax, p, text, col=RED):
     # For more controls on text size, font, etc. see
     # https://matplotlib.org/3.1.0/api/text_api.html#matplotlib.text.Text
     x, y = p
-    plt.text(x, y, text)
+    ax.text(x, y, text, color=col, fontsize=12)
 
 def show():
     """ Display in matplotlib window. """
-    setup()
     plt.show()
 
-def save(file_name):
+def save(fig, file_name):
     """ Takes a string of the form filename.png as input and saves image to that file. """
-    setup()
-    plt.savefig(file_name)
+    fig.savefig(file_name)
 
 def setup():
-    ax = plt.gca()
+    fig = plt.figure()
+    ax = fig.subplots(1, 1) # creates a figure with one Axes (plot)
     ax.autoscale()
     ax.margins(0.1)
-    plt.tight_layout()
-    plt.axis('off')
+    ax.axis("off")
+    return fig, ax
